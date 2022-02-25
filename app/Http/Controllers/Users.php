@@ -1,14 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-
+// use App\User;
 use Illuminate\Http\Request;
 use App\Models\User;
 class Users extends Controller
 {
     function list() 
     {
-        return view('userList');
+        $user = User::all();
+        return view('userList', ['user'=>$user]);
     }
     function create() 
     {
@@ -31,6 +32,9 @@ class Users extends Controller
        $user->name = $req->name;
        $user->email = $req->email;
        $user->password = $req->password;
-       $user->save();
+      $result= $user->save();
+      if($result) {
+          return redirect('/');
+      }
     }
 }
