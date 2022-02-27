@@ -6,11 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Contracts\Session\Session as SessionSession;
 use Session;
+
 class Users extends Controller
 {
     function list()
     {
-    //    return Session()->get('logData');
+        //    return Session()->get('logData');
         $user = User::all();
         return view('userList', ['user' => $user]);
     }
@@ -41,7 +42,8 @@ class Users extends Controller
         $user->password = $req->password;
         $result = $user->save();
         if ($result) {
-            return redirect('/');
+            $req->session()->put('logData', [$req->input()]);
+            return redirect('/list');
         }
     }
 }

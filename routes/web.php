@@ -18,10 +18,9 @@ Route::get('/', function () {
 });
 
 Route::get('/create', [Users::class, 'create']);
+Route::post('/loginsubmit', [Users::class, 'loginsubmit']);
+Route::post('/createsubmit', [Users::class, 'createsubmit']);
 
-
-Route::group(['middleware'=>['LoginCheck']], function() {
+Route::group(['middleware' => ['LoginCheck']], function () {
     Route::get('/list', [Users::class, 'list']);
-    Route::post('/loginsubmit', [Users::class, 'loginsubmit']);
-    Route::post('/createsubmit', [Users::class, 'createsubmit']);
 });

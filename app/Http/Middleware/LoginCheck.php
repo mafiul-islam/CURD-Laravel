@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Middleware;
-
+//use App\Http\Middleware\Session;
 use Closure;
 use Illuminate\Http\Request;
 
@@ -16,6 +16,10 @@ class LoginCheck
      */
     public function handle(Request $request, Closure $next)
     {
+        // print_r(Session()->get('logData'));
+        if (empty(Session()->get('logData'))) {
+            return redirect('/create');
+        };
         return $next($request);
     }
 }
